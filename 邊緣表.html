@@ -1,0 +1,167 @@
+<!-- 用一個物件，key 值為後兩碼，value 為中的張數。
+    Table -->
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script>
+
+    /*所有中獎號碼*/
+    var winNo1 = {
+        "domesticTravel": ["21", "32", "98", "67", "97", "410"],
+        "iYuan": ["64", "85"],
+        "agriculture": ["89", "32", "54", "597", "453", "152"],
+        "artFunE": ["96", "15", "07", "30", "73", "98", "19", "11"],
+        "artFunP": ["39", "37", "23", "36", "79", "08", "14", "75"],
+        "sports": ["97", "13", "19", "55", "71", "93", "381", "734", "644", "453", "985"],
+        "hakka": ["81", "900"],
+        "rgionalRevitalization": ["081", "105", "594", "188", "089", "396", "521", "467", "912", "798", "358", "441", "367", "941", "335"]
+    }
+
+    var winNo2 = {
+        "domesticTravel": ["87", "04", "40", "29", "71"],
+        "iYuan": ["12", "59"],
+        "agriculture": ["50", "13"],
+        "artFunE": ["78", "00", "39", "22", "61", "23", "15"],
+        "artFunP": ["37", "76", "31", "06", "51", "65", "81"],
+        "sports": ["91", "11", "04", "18", "57", "498", "756"],
+        "hakka": ["11", "439", "841", "052", "206", "161", "457", "205", "012", "293", "446", "589"],
+        "rgionalRevitalization": ["598", "880", "886", "675", "684", "568", "645", "456"]
+    }
+
+    var winNo3 = {
+        "domesticTravel": ["44", "34", "09", "55", "35", "041"],
+        "iYuan": ["48", "49"],
+        "agriculture": ["60", "75"],
+        "artFunE": ["01", "92", "19", "23", "79", "95", "48", "46"],
+        "artFunP": ["31", "56", "02", "52", "44", "49", "00", "47", "59"],
+        "sports": ["82", "45", "57", "53", "00", "546", "855", "865", "012", "983"],
+        "hakka": ["14", "269"],
+        "rgionalRevitalization": ["771", "706", "064", "168", "191", "459", "135", "314", "366"]
+    };
+
+    var winNo4 = {
+        "domesticTravel": ["32", "02", "87", "93", "82", "17"],
+        "iYuan": ["29", "82", "71"],
+        "agriculture": ["315", "740", "381", "264", "285", "765", "682", "763", "373", "015", "374"],
+        "artFunE": ["70", "61", "37", "85", "67", "35", "44"],
+        "artFunP": ["75", "72", "71", "28", "67", "82", "93", "56", "34", "07"],
+        "sports": ["30", "03", "51", "88"],
+        "hakka": ["69"],
+        "rgionalRevitalization": ["743", "201", "119", "828", "221", "750", "046"]
+    };
+
+    const win = [winNo1, winNo2, winNo3, winNo4];     
+
+    /*統計張數並建成table*/
+    function show() {
+        var times = { };
+        var content = "<table>"
+        
+        for(let i = 0; i < 100; i++) {                        
+            
+            /*計算張數*/
+            var count = 0;  
+            for (week of win) {
+                for (prize in week) {
+                    for (winner of week[prize]) {
+                        if (i == winner) {
+                            count++;
+                        }else if (i == (winner%100)) {
+                            count++;
+                        }
+                    }
+                }
+            }
+            times[i] = count;              
+
+            /*建立table*/
+            if (i%10 == 0) {
+                content += "<tr>";
+            }
+            
+            switch(times[i]) {
+                case 0:
+                    content += "<td>" + i + " </td>";
+                    break;
+                case 1:
+                    content += "<td bgcolor = '#ACD6FF'>" + i + "</td>";
+                    break;
+                case 2:
+                    content += "<td bgcolor = '#E0B5FF'>" + i + "</td>";
+                    break;
+                case 3:
+                    content += "<td bgcolor = '#C2FF68'>" + i + "</td>";
+                    break;
+                case 4:
+                    content += "<td bgcolor = '#FFFF6F'>" + i + "</td>";
+                    break;
+                case 5:
+                    content += "<td bgcolor = '#FFCF78'>" + i + "</td>";
+                    break;
+            }   
+            if (i%10 == 9) {
+                content += "</tr>";
+            }
+        }
+
+        content += "</table>";
+        document.getElementById("result").innerHTML = content;
+    }
+</script>
+
+<style>
+    /*表格*/
+    table {
+        border: 2px solid;
+        width: 700px;
+        height: 450px;
+        margin-left: 400px;
+        margin-right: 100px;
+    }
+    tr,td {
+        border: 1px solid;
+        text-align: center;
+    }
+
+    .container {
+        height: 100px;
+    }
+    /*圖例*/
+    h6 {
+        margin-top: 10px;
+        margin-left: 510px;
+        margin-bottom: 100px;
+    }
+
+    .figure {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: top;
+        border: 0.5px solid;
+    }
+
+</style>
+
+<body onload = "show()">
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4" >加碼券 邊緣表</h1>
+            <p class="lead" >看看你是不是國家級邊緣人</p>
+        </div>
+    </div>
+
+    <h5 style="padding-left: 300px; padding-bottom: 20px;">將加碼券的中獎號碼統計成表格（三碼也有計入），如下，</h5>
+
+    <output id="result"></output>
+
+    <!-- 圖例展示 -->
+    <h6> <div class="figure" style="background-color: white;"></div>：0張&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="figure" style="background-color: #ACD6FF;"></div>：1張&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="figure" style="background-color: #E0B5FF;"></div>：2張&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="figure" style="background-color: #C2FF68;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>：3張&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="figure" style="background-color: #FFFF6F;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>：4張&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="figure" style="background-color: #FFCF78;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>：5張</h6>
+</body>
